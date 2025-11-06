@@ -2,4 +2,4 @@ package animals;
 
 import animals.Herbivores;
 
-public class  Mouse extends Herbivores{public Mouse(){super("Mouse");}}
+public class  Mouse extends Omnivorous{public Mouse(){super("Mouse");}}

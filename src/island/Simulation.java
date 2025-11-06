@@ -103,16 +103,32 @@ public class Simulation {
     }
 
     private void printStats() {
-        long predators = 0, herbivores = 0, plants = 0;
+        long predators = 0, herbivores = 0, omnivores = 0, plants = 0;
+
         for (int i = 0; i < Island.HEIGHT; i++) {
             for (int j = 0; j < Island.WIDTH; j++) {
-                var cell = island.getCell(i, j);
-                if (cell.getPlant() != null && cell.getPlant().getWeight() > 0) plants++;
-                predators += cell.getAnimals().stream().filter(a -> a.isAlive() && a instanceof animals.Predators).count();
-                herbivores += cell.getAnimals().stream().filter(a -> a.isAlive() && a instanceof animals.Herbivores).count();
+                Cell c = island.getCell(i, j);
+
+                if (c.getPlant() != null && c.getPlant().getWeight() > 0) {
+                    plants++;
+                }
+
+                predators += c.getAnimals().stream()
+                        .filter(a -> a.isAlive() && a instanceof animals.Predators)
+                        .count();
+
+                herbivores += c.getAnimals().stream()
+                        .filter(a -> a.isAlive() && a instanceof animals.Herbivores)
+                        .count();
+
+                omnivores += c.getAnimals().stream()
+                        .filter(a -> a.isAlive() && a instanceof animals.Omnivorous)
+                        .count();
             }
         }
-        System.out.printf("🌿 Plants: %d | 🐇 Herbivores: %d | 🐺 Predators: %d%n",
-                plants, herbivores, predators);
+
+        System.out.printf("🌿 Plants: %d | 🐇 Herbivores: %d | 🍖 Omnivores: %d | 🐺 Predators: %d%n",
+                plants, herbivores, omnivores, predators);
     }
+
 }

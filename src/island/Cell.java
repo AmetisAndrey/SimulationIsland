@@ -2,6 +2,7 @@ package island;
 
 import animals.Animal;
 import plant.Plant;
+import plant.PlantsType;
 import utils.RandomGenerator;
 
 import java.util.*;
@@ -11,6 +12,15 @@ public class Cell {
 
     private final List<Animal> animals = new CopyOnWriteArrayList<>();
     private Plant plant;
+    private TerrainType terrain = TerrainType.LAND;
+
+    public TerrainType getTerrain(){
+        return terrain;
+    }
+
+    public void setTerrain(TerrainType terrain) {
+        this.terrain = terrain;
+    }
 
     public synchronized List<Animal> getAnimals() {
         return new ArrayList<>(animals);
@@ -27,15 +37,11 @@ public class Cell {
 
     public void growPlant() {
         if (plant == null) {
-            plant = new Plant(RandomGenerator.nextDouble(5.0, 10.0));
+          int r = RandomGenerator.nextInt(1,3);
+          PlantsType type = (r == 1) ? PlantsType.GRASS : (r == 2) ? PlantsType.BUSH : PlantsType.TREE;
+          plant = new Plant(type);
         } else {
-            double current = plant.getWeight();
-            if (current < 20.0) {
-                double growth = RandomGenerator.nextDouble(0.5, 1.0);
-
-            }
-            if (RandomGenerator.chance(90)) return;
-
+            plant.grow();
         }
     }
 

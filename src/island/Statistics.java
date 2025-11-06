@@ -2,7 +2,7 @@ package island;
 
 import animals.Animal;
 
-    public class Statictics {
+    public class Statistics {
         public static void print(Island island) {
         int alive = 0;
         int plants = 0;

@@ -1,13 +1,50 @@
 package plant;
 
+
 public class Plant {
     private double weight;
+    private final double maxWeight;
+    private final double growthPerTick;
+    private final PlantsType type;
 
-    public Plant(double weight) { this.weight = weight; }
+    public Plant(PlantsType type) {
+        this.type = type;
+        switch(type) {
+            case GRASS -> {
+                this.weight = 3.0;
+                this.maxWeight = 15.0;
+                this.growthPerTick = 1.0;
+            }
+            case BUSH -> {
+                this.weight = 5.0;
+                this.maxWeight = 25.0;
+                this.growthPerTick = 0.7;
+            }
+            case TREE -> {
+                this.weight = 8.0;
+                this.maxWeight = 40.0;
+                this.growthPerTick = 0.4;
+            }
+            default -> throw new IllegalArgumentException("Неизвестный тип растения");
+        }
+    }
 
-    public double getWeight() { return weight; }
+    public  PlantsType getType(){
+        return type;
+    }
 
-    public void grow() { weight += 1.0; }
+    public double getWeight() {
+        return weight;
+    }
 
-    public void reduce(double amount) { weight = Math.max(0, weight - amount); }
+    public void grow() {
+        if(weight < maxWeight){
+            weight = Math.min(maxWeight, weight + growthPerTick);
+        }
+    }
+
+    public void reduce(double amount) {
+        weight = Math.max(0.0, weight - amount);
+    }
 }
+

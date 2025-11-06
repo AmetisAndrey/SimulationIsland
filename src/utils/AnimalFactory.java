@@ -1,8 +1,8 @@
 package utils;
 
 import animals.*;
-import animals.Predators;
-import animals.Herbivores;
+import animals.Bear;
+
 import java.util.Random;
 
 
@@ -13,26 +13,32 @@ public class AnimalFactory {
             "Sheep", "Boar", "Buffalo", "Duck", "Caterpillar"
     };
 
-    public static Animal create(String type){
+    public static Animal create(String type) {
         return switch (type) {
             case "Wolf" -> new Wolf();
             case "Snake" -> new Snake();
             case "Fox" -> new Fox();
-            case "Bear" -> new Bear();
             case "Eagle" -> new Eagle();
+            case "Bear" -> new Bear();
+
+            case "Boar" -> new Boar();
+            case "Mouse" -> new Mouse();
+            case "Duck" -> new Duck();
+            case "Hedgehog" -> new Hedgehog();
+
             case "Horse" -> new Horse();
             case "Deer" -> new Deer();
             case "Rabbit" -> new Rabbit();
-            case "Mouse" -> new Mouse();
             case "Goat" -> new Goat();
             case "Sheep" -> new Sheep();
-            case "Boar" -> new Boar();
             case "Buffalo" -> new Buffalo();
-            case "Duck" -> new Duck();
             case "Caterpillar" -> new Caterpillar();
-            default -> throw new IllegalArgumentException("Неизвестный тип: " + type);
+            case "Swan" -> new Swan();
+
+            default -> null;
         };
     }
+
 
     public static Animal randomAnimal() {
         Random r = new Random();
